@@ -67,7 +67,7 @@ lib/
 dist/
 build/
 
-__output__/
+__output__
 
 .linaria-cache
 .cache

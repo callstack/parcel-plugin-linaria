@@ -36,6 +36,7 @@ class LinariaAsset extends JSAsset {
 
           this.addDependency(resolved, { includedInParent: true });
         } catch (e) {
+          // eslint-disable-next-line no-console
           console.warn(`Failed to add dependency '${dep}' for ${this.name}`, e);
         }
       });

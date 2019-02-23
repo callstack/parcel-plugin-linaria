@@ -1,0 +1,7 @@
+__fixtures__/
+__output__/
+
+dist/
+node_modules/
+
+.cache/

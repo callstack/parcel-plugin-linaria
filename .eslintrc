@@ -1,0 +1,9 @@
+{
+  'extends': '@callstack/eslint-config',
+  'rules':
+    {
+      'global-require': 'off',
+      'import/no-extraneous-dependencies':
+        ['error', { 'devDependencies': true }],
+    },
+}

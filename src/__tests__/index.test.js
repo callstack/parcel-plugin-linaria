@@ -20,7 +20,7 @@ const bundleFile = async filename => {
   return bundle;
 };
 
-it('bundles file with css tag', async function() {
+it('bundles file with css tag', async () => {
   const bundle = await bundleFile(
     path.join(__dirname, '..', '__fixtures__', 'css.js')
   );
@@ -41,7 +41,7 @@ it('bundles file with css tag', async function() {
   });
 });
 
-it('bundles file with styled tag', async function() {
+it('bundles file with styled tag', async () => {
   const bundle = await bundleFile(
     path.join(__dirname, '..', '__fixtures__', 'styled.js')
   );
@@ -60,7 +60,7 @@ it('bundles file with styled tag', async function() {
   });
 });
 
-it('bundles combined file', async function() {
+it('bundles combined file', async () => {
   const bundle = await bundleFile(
     path.join(__dirname, '..', '__fixtures__', 'index.js')
   );
@@ -70,7 +70,7 @@ it('bundles combined file', async function() {
     childBundles: [
       {
         type: 'css',
-        assets: ["css.js", "styled.js"],
+        assets: ['css.js', 'styled.js'],
       },
       {
         type: 'map',
