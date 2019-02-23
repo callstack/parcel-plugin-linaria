@@ -46,7 +46,7 @@ class LinariaAsset extends JSAsset {
   }
 
   async generate() {
-    const { cssText } = this[RESULT];
+    const { cssText, cssSourceMapText } = this[RESULT];
     const output = (await super.generate()) || {};
 
     const result = [
@@ -60,7 +60,12 @@ class LinariaAsset extends JSAsset {
     if (cssText) {
       result.push({
         type: 'css',
-        value: cssText,
+        value: {
+          map: cssSourceMapText,
+          toString() {
+            return cssText;
+          },
+        },
         final: true,
       });
 
