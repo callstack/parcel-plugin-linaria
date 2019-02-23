@@ -36,10 +36,7 @@ class LinariaAsset extends JSAsset {
 
           this.addDependency(resolved, { includedInParent: true });
         } catch (e) {
-          console.warn(
-            `Failed to add dependency '${dep}' for ${this.name}`,
-            e
-          );
+          console.warn(`Failed to add dependency '${dep}' for ${this.name}`, e);
         }
       });
     }
@@ -53,12 +50,6 @@ class LinariaAsset extends JSAsset {
 
     if (result.cssText) {
       output.css = result.cssText;
-
-      if (this.options.sourceMaps) {
-        output.css += `/*# sourceMappingURL=data:application/json;base64,${Buffer.from(
-          result.cssSourceMapText || ''
-        ).toString('base64')}*/`;
-      }
     }
 
     return output;
