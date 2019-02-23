@@ -1,3 +1,5 @@
+const path = require('path');
+const Module = require('module');
 const JSAsset = require('parcel-bundler/src/assets/JSAsset');
 const transform = require('linaria/lib/transform');
 
@@ -25,7 +27,20 @@ class LinariaAsset extends JSAsset {
 
     if (dependencies) {
       dependencies.forEach(dep => {
-        this.addDependency(dep);
+        try {
+          const resolved = Module._resolveFilename(dep, {
+            id: this.name,
+            filename: this.name,
+            paths: Module._nodeModulePaths(path.dirname(this.name)),
+          });
+
+          this.addDependency(resolved, { includedInParent: true });
+        } catch (e) {
+          console.warn(
+            `Failed to add dependency '${dep}' for ${this.name}`,
+            e
+          );
+        }
       });
     }
 
