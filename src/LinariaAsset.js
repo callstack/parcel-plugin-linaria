@@ -1,51 +1,43 @@
-const { Asset } = require('parcel-bundler');
+const JSAsset = require('parcel-bundler/src/assets/JSAsset');
 const { SourceMapConsumer } = require('source-map');
 const transform = require('linaria/lib/transform');
 
-class LinariaAsset extends Asset {
-  constructor(name, pkg, options) {
-    super(name, pkg, options);
+const RESULT = Symbol('linaria-transform-result');
+
+class LinariaAsset extends JSAsset {
+  constructor(...args) {
+    super(...args);
   }
 
   pretransform() {
-    this.transformedResult = transform(this.contents, {
+    const result = transform(this.contents, {
       filename: this.name,
     });
+
+    this[RESULT] = result;
+    this.contents = result.code;
+
+    super.pretransform();
   }
 
   collectDependencies() {
-    const { dependencies } = this.transformedResult;
+    const { dependencies } = this[RESULT];
 
     if (dependencies) {
       dependencies.forEach(dep => {
         this.addDependency(dep);
       });
     }
+
+    super.collectDependencies();
   }
 
-  generate() {
-    const result = this.transformedResult;
-
-    if (result.code === this.contents) {
-      return;
-    }
-
-    const output = [
-      {
-        type: 'js',
-        value: result.code,
-        sourceMap: this.options.sourceMaps ? result.sourceMap : undefined,
-      },
-    ];
+  async generate() {
+    const result = this[RESULT];
+    const output = (await super.generate()) || {};
 
     if (result.cssText) {
-      output.push({
-        type: 'css',
-        value: result.cssText,
-        sourceMap: this.options.sourceMaps
-          ? new SourceMapConsumer(result.cssSourceMapText)
-          : undefined,
-      });
+      output.css = result.cssText;
     }
 
     return output;

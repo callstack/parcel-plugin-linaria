@@ -1,3 +1,3 @@
 module.exports = function(bundler) {
-  bundler.addAssetType('.js', require.resolve('./LinariaAsset'));
+  bundler.addAssetType('js', require.resolve('./LinariaAsset'));
 };

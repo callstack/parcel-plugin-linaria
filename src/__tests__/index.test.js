@@ -27,11 +27,15 @@ it('bundles file with css tag', async function() {
 
   assertBundleTree(bundle, {
     name: 'css.js',
-    assets: ['css.js'],
+    assets: ['css.js', 'css.js', 'cx.js', 'index.js'],
     childBundles: [
       {
         type: 'css',
         assets: ['css.js'],
+      },
+      {
+        type: 'map',
+        assets: ['css.js', 'css.js', 'cx.js', 'index.js'],
       },
     ],
   });
@@ -44,11 +48,32 @@ it('bundles file with styled tag', async function() {
 
   assertBundleTree(bundle, {
     name: 'styled.js',
-    assets: ['styled.js'],
     childBundles: [
+      {
+        type: 'map',
+      },
       {
         type: 'css',
         assets: ['styled.js'],
+      },
+    ],
+  });
+});
+
+it('bundles combined file', async function() {
+  const bundle = await bundleFile(
+    path.join(__dirname, '..', '__fixtures__', 'index.js')
+  );
+
+  assertBundleTree(bundle, {
+    name: 'index.js',
+    childBundles: [
+      {
+        type: 'css',
+        assets: ["css.js", "styled.js"],
+      },
+      {
+        type: 'map',
       },
     ],
   });
