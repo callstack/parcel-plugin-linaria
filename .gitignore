@@ -70,3 +70,4 @@ build/
 __output__/
 
 .linaria-cache
+.cache

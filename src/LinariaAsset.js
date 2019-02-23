@@ -1,23 +1,23 @@
 const JSAsset = require('parcel-bundler/src/assets/JSAsset');
-const { SourceMapConsumer } = require('source-map');
 const transform = require('linaria/lib/transform');
 
 const RESULT = Symbol('linaria-transform-result');
 
 class LinariaAsset extends JSAsset {
-  constructor(...args) {
-    super(...args);
-  }
+  async pretransform() {
+    if (!/node_modules/.test(this.name)) {
+      const result = transform(this.contents, {
+        filename: this.name,
+      });
 
-  pretransform() {
-    const result = transform(this.contents, {
-      filename: this.name,
-    });
+      this[RESULT] = result;
+      this.contents = result.code;
+      this.ast = null;
+    } else {
+      this[RESULT] = {};
+    }
 
-    this[RESULT] = result;
-    this.contents = result.code;
-
-    super.pretransform();
+    await super.pretransform();
   }
 
   collectDependencies() {
@@ -38,6 +38,12 @@ class LinariaAsset extends JSAsset {
 
     if (result.cssText) {
       output.css = result.cssText;
+
+      if (this.options.sourceMaps) {
+        output.css += `/*# sourceMappingURL=data:application/json;base64,${Buffer.from(
+          result.cssSourceMapText || ''
+        ).toString('base64')}*/`;
+      }
     }
 
     return output;
