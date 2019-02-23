@@ -46,14 +46,38 @@ class LinariaAsset extends JSAsset {
   }
 
   async generate() {
-    const result = this[RESULT];
+    const { cssText } = this[RESULT];
     const output = (await super.generate()) || {};
 
-    if (result.cssText) {
-      output.css = result.cssText;
+    const result = [
+      {
+        type: 'js',
+        value: output.js,
+        sourceMap: output.map,
+      },
+    ];
+
+    if (cssText) {
+      result.push({
+        type: 'css',
+        value: cssText,
+        final: true,
+      });
+
+      if (this.options.hmr) {
+        this.addDependency('_css_loader');
+
+        result[0].value += `
+          ;(function() {
+            var reloadCSS = require('_css_loader');
+            module.hot.dispose(reloadCSS);
+            module.hot.accept(reloadCSS);
+          })();
+        `;
+      }
     }
 
-    return output;
+    return result;
   }
 }
 
