@@ -46,21 +46,20 @@ class LinariaAsset extends JSAsset {
   }
 
   async generate() {
-    const { cssText } = this[RESULT];
-    const output = (await super.generate()) || {};
+    const { cssText, sourceMap } = this[RESULT];
+    const output = (await super.generate()) || [];
 
-    const result = [
-      {
-        type: 'js',
-        value: output.js,
-        sourceMap: output.map,
-      },
-    ];
+    const result = output.map(value => ({
+      type: value.type,
+      value: value.value,
+      sourceMap: value.map,
+    }))
 
     if (cssText) {
       result.push({
         type: 'css',
         value: cssText,
+        sourceMap,
         final: true,
       });
 
