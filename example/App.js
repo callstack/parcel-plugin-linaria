@@ -6,7 +6,7 @@ import constants from './constants';
 
 const Title = styled.h1`
   font-family: ${constants.fontFamily};
-  font-size: 16px;
+  font-size: 18px;
   color: ${() => constants.primaryColor};
 `;
 

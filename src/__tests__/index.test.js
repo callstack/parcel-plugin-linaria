@@ -33,6 +33,7 @@ it('bundles file with css tag', async () => {
         type: 'css',
         assets: ['css.js'],
       },
+      { type: 'map' },
     ],
   });
 });
@@ -45,6 +46,7 @@ it('bundles file with styled tag', async () => {
   assertBundleTree(bundle, {
     name: 'styled.js',
     childBundles: [
+      { type: 'map' },
       {
         type: 'css',
         assets: ['styled.js'],
@@ -65,6 +67,7 @@ it('bundles combined file', async () => {
         type: 'css',
         assets: ['css.js', 'styled.js'],
       },
+      { type: 'map' },
     ],
   });
 });
