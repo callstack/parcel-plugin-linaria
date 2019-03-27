@@ -14,7 +14,7 @@
     "release": "release-it"
   },
   "dependencies": {
-    "parcel-bundler": "^1.11.0"
+    "parcel-bundler": "^1.12.3"
   },
   "devDependencies": {
     "@babel/core": "^7.3.3",
