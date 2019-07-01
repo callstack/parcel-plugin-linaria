@@ -6545,10 +6545,14 @@ parcel-assert-bundle-tree@^1.0.0:
   resolved "https://registry.yarnpkg.com/parcel-assert-bundle-tree/-/parcel-assert-bundle-tree-1.0.0.tgz#d10a1bff6fb690cdbda5201cae216366c23c837e"
   integrity sha512-PpEArwgoZGRCDdHLxFpjs4Rl5X8dAL0SUQ8uqsXVSJMDmbSbha1P28X2kWaTu2RVfwSswv7MSF0NA/qzn0H/IA==
 
-parcel-bundler@^1.12.3:
+"parcel-plugin-linaria@link:./.":
+  version "0.0.0"
+  uid ""
+
+parcel@^1.12.3:
   version "1.12.3"
-  resolved "https://registry.yarnpkg.com/parcel-bundler/-/parcel-bundler-1.12.3.tgz#2bbf70bfa2d06097f071653285040bd125684d09"
-  integrity sha512-8bq6lj0hhQeGxD9f9xEkFMXQ3d8TIlf2+isKxoi9bciB0KVEILRGllaPkUgp++5t0anToBh9+tG6ZyInXOC1/A==
+  resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.12.3.tgz#1f1341589380f20be924f1dd67c7fed193b346ec"
+  integrity sha512-j9XCVLeol9qZvGemRKt2z8bptbXq9LVy8/IzjqWQKMiKd8DR0NpDAlRHV0zyF72/J/UUTsdsrhnw6UGo9nGI+Q==
   dependencies:
     "@babel/code-frame" "^7.0.0 <7.4.0"
     "@babel/core" "^7.0.0 <7.4.0"
@@ -6607,9 +6611,6 @@ parcel-bundler@^1.12.3:
     terser "^3.7.3"
     v8-compile-cache "^2.0.0"
     ws "^5.1.1"
-
-"parcel-plugin-linaria@link:./.":
-  version "0.1.1"
 
 parent-module@^1.0.0:
   version "1.0.0"

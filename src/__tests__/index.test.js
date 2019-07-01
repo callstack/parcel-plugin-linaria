@@ -1,4 +1,4 @@
-const Bundler = require('parcel-bundler');
+const Bundler = require('parcel');
 const assertBundleTree = require('parcel-assert-bundle-tree');
 const path = require('path');
 const LinariaPlugin = require('../index');
