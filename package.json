@@ -20,7 +20,7 @@
     "@callstack/eslint-config": "^6.1.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@release-it/conventional-changelog": "^1.1.0",
-    "codecov": "^3.5.0",
+    "codecov": "^3.7.1",
     "commitlint": "^8.0.0",
     "eslint": "^6.0.1",
     "husky": "^3.0.0",
